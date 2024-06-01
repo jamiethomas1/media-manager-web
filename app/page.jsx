@@ -13,7 +13,7 @@ export default function Home() {
     }, [])
 
     return (
-        <div className="grid grid-cols-4 gap-4 max-w-screen-lg mx-auto xl:max-w-screen-2xl">
+        <div className="grid grid-cols-4 gap-4 max-w-screen-lg mx-auto 2xl:max-w-screen-2xl">
             {videos.map(video => (
                 <VideoCard key={video.id} video={video} />
             ))}

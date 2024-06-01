@@ -11,7 +11,7 @@ export default function HoverThumbnail({ thumbnails }) {
         setHovering(true)
         const intervalId = setInterval(() => {
             setCurrentImageIndex(prevIndex => (prevIndex + 1) % images.length)
-        }, 1000)
+        }, 500)
 
         setHoverInterval(intervalId)
     }
