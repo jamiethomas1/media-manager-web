@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from "react";
+import HoverThumbnail from "./HoverThumbnail";
 
 export default function VideoCard({ video }) {
     const [studio, setStudio] = useState("")
@@ -15,12 +16,7 @@ export default function VideoCard({ video }) {
         <div className="border border-red-900 grid-item p-4 break-words">
             <p className="text-sm">{video.title}</p>
             <p>{studio.name}</p>
-            <img
-                src={process.env.backendUrl + '/' + video.thumbnails[0]}
-                alt={video.title}
-                width={320}
-                height={180}
-            />
+            <HoverThumbnail thumbnails={video.thumbnails} />
         </div>
     )
 }
