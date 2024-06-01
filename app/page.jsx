@@ -1,20 +1,22 @@
 'use client'
+
 import { useEffect, useState } from "react";
+import VideoCard from "./_components/VideoCard";
 
 export default function Home() {
-    const [video, setVideo] = useState("")
+    const [videos, setVideos] = useState([])
 
     useEffect(() => {
-        fetch(process.env.backendUrl + "/api/video/1")
+        fetch(process.env.backendUrl + "/api/videos")
             .then(res => res.json())
-            .then(data => setVideo(data[0]))
-    })
+            .then(data => setVideos(data))
+    }, [])
 
     return (
-        <div>
-            <h1 className="text-4xl font-bold">See below for test</h1>
-            <p>{video.title}</p>
-            <video src={video.path} controls></video>
+        <div className="grid grid-cols-4 gap-4 max-w-screen-lg mx-auto">
+            {videos.map(video => (
+                <VideoCard key={video.id} video={video} />
+            ))}
         </div>
     );
 }
