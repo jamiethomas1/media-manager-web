@@ -1,10 +1,12 @@
+'use client'
+
 import { useState } from "react";
 
 export default function HoverThumbnail({ thumbnails }) {
     const [currentImageIndex, setCurrentImageIndex] = useState(0)
     const [hoverInterval, setHoverInterval] = useState(null)
 
-    const images = thumbnails.map(url => process.env.backendUrl + '/' + url)
+    const images = thumbnails.map(url => 'http://localhost:8000/' + url)
 
     const handleMouseEnter = () => {
         const intervalId = setInterval(() => {

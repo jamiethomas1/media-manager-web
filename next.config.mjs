@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     env: {
-        backendUrl: 'http://localhost:8000',
+        backendUrl: 'http://mm-api:80',
     },
     images: {
         remotePatterns: [
