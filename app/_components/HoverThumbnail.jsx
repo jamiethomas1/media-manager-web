@@ -1,14 +1,12 @@
 import { useState } from "react";
 
 export default function HoverThumbnail({ thumbnails }) {
-    const [hovering, setHovering] = useState(false)
     const [currentImageIndex, setCurrentImageIndex] = useState(0)
     const [hoverInterval, setHoverInterval] = useState(null)
 
     const images = thumbnails.map(url => process.env.backendUrl + '/' + url)
 
     const handleMouseEnter = () => {
-        setHovering(true)
         const intervalId = setInterval(() => {
             setCurrentImageIndex(prevIndex => (prevIndex + 1) % images.length)
         }, 500)
@@ -17,7 +15,6 @@ export default function HoverThumbnail({ thumbnails }) {
     }
 
     const handleMouseLeave = () => {
-        setHovering(false)
         clearInterval(hoverInterval)
         setCurrentImageIndex(0)
     }
