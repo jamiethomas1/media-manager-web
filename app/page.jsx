@@ -8,6 +8,7 @@ export default async function Home() {
             {videos.map(async (video) => {
                 let studio = await getStudio(video.studio_id)
                 let cast = await getCast(video.id)
+                let tags = await getTags(video.id)
 
                 return (
                     <VideoCard 
@@ -15,6 +16,7 @@ export default async function Home() {
                         video={video}
                         studio={studio}
                         cast={cast}
+                        tags={tags}
                     />)
             })}
         </div>
@@ -58,3 +60,16 @@ async function getCast(id) {
 
     return data
 }
+
+async function getTags(id) {
+    const res = await fetch(process.env.backendUrl + "/api/tags/" + id)
+
+    if (!res.ok) {
+        throw new Error('Failed to fetch data')
+    }
+    
+    const data = await res.json()
+
+    return data
+}
+
