@@ -2,6 +2,7 @@ export default async function Video({ params }) {
     let video = await getVideo(params.id)
     let studio = await getStudio(video.studio_id)
     let cast = await getCast(video.id)
+    let tags = await getTags(video.id)
 
     const dateOptions = {
         day: "numeric",
@@ -13,7 +14,10 @@ export default async function Video({ params }) {
     return (
         <div>
             <p>{video.title}</p>
-            <video src={"http://localhost:8000/" + video.path} controls />
+            {tags.map(tag => <p key={tag.id}>{tag.name}</p>)}
+            <div className="max-w-5xl">
+                <video src={"http://localhost:8000/" + video.path} controls />
+            </div>
             <p>{studio.name}</p>
             <p>{release_date}</p>
             {cast.map(actress => <p key={actress.id}>{actress.name}</p>)}
@@ -58,3 +62,16 @@ async function getCast(id) {
 
     return data
 }
+
+async function getTags(id) {
+    const res = await fetch(process.env.backendUrl + "/api/tags/" + id)
+
+    if (!res.ok) {
+        throw new Error('Failed to fetch data')
+    }
+    
+    const data = await res.json()
+
+    return data
+}
+
